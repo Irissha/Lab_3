@@ -1,4 +1,4 @@
-﻿#include <cstdlib>                      //библиотека для вычисления модуля                    
+#include <cstdlib>                      //библиотека для вычисления модуля                    
 #include <iostream>
 #include <math.h>
 #define E 10e-4
@@ -14,7 +14,6 @@ int main()
 	int		i1, i2, i3;		//переменные для циклов
 	double	h = (b - a) / k;	//шаг по Х
 	double	x;				//текущий Х
-	double	xn;				//накапливаемый Х для очередного сложения в итерациях
 	double	sn;				//один элемент ряда
 	double	S1;				//сумма ряда из n элементов
 	double	S2;				//сумма ряда, пока очередной элемент больше погрешности
@@ -25,12 +24,11 @@ int main()
 		x = a + i1 * h;
 		f = -log(fabs(2 * sin(x / 2))); //fabs-модуль
 
-		for (S1 = 0, xn = -1, i2 = 1; i2 <= n; i2++)
+		for (S1 = 0, i2 = 1; i2 <= n; i2++)
 		{
-			xn *= -x * x;
 			S1 += (cos(i2 * x) / i2);
 		}
-		for (S2 = 0, xn = -1, sn = 1, i3 = 1; fabs(sn) >= e; i3++)
+		for (S2 = 0, sn = 1, i3 = 1; fabs(sn) >= e; i3++)
 		{
 			xn *= -x * x;
 			sn = (cos(i3 * x) / i3);
@@ -38,3 +36,4 @@ int main()
 		}
 		printf("x=%.2f SN=%f SE=%f Y=%f\n", x, S1, S2, f); // вывод краткий (вместо cout)
 	}
+}
